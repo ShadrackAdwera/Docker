@@ -43,7 +43,7 @@ The result of running this command will be the container name and some other met
 * Run a docker container
 
 `
-$ docker run -p 3000: 3000 container-name
+$ docker run -p 3000:3000 container-name
 `
 
 The former 3000 represents the PORT exposed to the container to run on the local machine, the latter is the PORT in the container(self contained) that is exposed when the image is created.
@@ -68,10 +68,10 @@ $ docker ps -a
 $ docker stop container-name
 `
 
-* Delete an image and all the layers inside that image. However you can only remove an image if it is not being used by an container; that includes the stopped containers.
+* Delete an image and all the layers inside that image. However you can only remove an image if it is not being used by a container; that includes the stopped containers.
 
 `
-$ docker rmi image-id
+$ docker rm image-id
 `
 
 * Delete a container
@@ -104,6 +104,22 @@ $ docker container prune
 `
 $ docker <command name eg. run , build> --help
 `
-##
+
+## Naming and tagging containers / images
+
+* Images can also be named (tagged) while containers named instead of using the default name provided upon an image build. There are 2 scenarios:
+    - Chosing a specific version of an image when building the Dockerfile, you can specify in the FROM say,  <mark>FROM node:latest</mark> . This will build your image based on the latest version of node. [More on supported node tags]('https://hub.docker.com/_/node')
+    - To tag your own image, while building the image, run: 
+
+        `
+        $ docker build -t tag-name:version .
+        ` 
+* In naming containers, use --name container-name tag
+
+`
+$ docker run -p 3000:3000 -d --rm --name any-name image-tag
+`
+
+
 
 * Anyways, Clone the project, build your own container from the image, run the server on port 5000 
