@@ -71,7 +71,7 @@ $ docker stop container-name
 * Delete an image and all the layers inside that image. However you can only remove an image if it is not being used by a container; that includes the stopped containers.
 
 `
-$ docker rm image-id
+$ docker rmi image-id
 `
 
 * Delete a container
@@ -83,9 +83,9 @@ $ docker rm <container-name(s)>
 Well, an app may not necessarily need a server to run. Say the Fibonacci Sequence, a quick sort algorithm, 0-1 Knapsack Algorithm, you catch the drift, in such a scenario regarding utility functions we can use:
 
 `
-$ docker start -a -i container-name
+$ docker run -it image_id
 `
-The container starts in an attached state.
+The it tag tells docker that we want to run the app in an interactive mode ie. provide user input and receive output on the console.
 
 * Remove all unused images
 
