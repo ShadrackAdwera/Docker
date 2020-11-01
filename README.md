@@ -88,28 +88,34 @@ The it tag tells docker that we want to run the app in an interactive mode ie. p
   - Chosing a specific version of an image when building the Dockerfile, you can specify in the FROM say, <mark>FROM node:latest</mark> . This will build your image based on the latest version of node. [More on supported node tags]('https://hub.docker.com/_/node')
   - To tag your own image, while building the image, run:
 
-    ` $ docker build -t tag-name:version . `
+    `$ docker build -t tag-name:version .`
 
 - In naming containers, use --name container-name tag
 
 `$ docker run -p 3000:3000 -d --rm --name any-name image-tag`
 
-### Docker Command
+## Bind Mounts, Anonymous and Named Volumes
 
-`$ docker run -p 3000:80 -d --rm --name my_container -v file_path:/app/file-path image:tag`
+- Anonymous volumes are good for persisting data for the entirety of when the container is in use, it is removed when the container is removed
 
-`-v creates a named volume with the path /app/file-path `
+`$ docker run -v app/data`
 
 - Named volumes persist data even when the container is removed
 
-### Bind Mounts and Named Volumes
+`$ docker run -v data:/app/data`
 
-- Unlike named volumes which are only great for persisting data and not editable data, bind mounts are great for both persisting and edit data. A Bind Mount is your entire file / folder mounted inside the container as a volume.
+- -v creates a named volume with the path /app/file-path ie. -v data:/app/data
 
-- You add a bind mount the same way a volume is added. Use the -v tag but before the path inside the container use the absolute path to the folder / file being mounted, before the path to the directory inside the container. Another advantage is that when you change your file, you need not rebuild your image
+* Unlike named volumes which are only great for persisting data and not editable data, bind mounts are great for both persisting and edit data. A Bind Mount is your entire file / folder mounted inside the container as a volume.
+
+* You add a bind mount the same way a volume is added. Use the -v tag but before the path inside the container use the absolute path to the folder / file being mounted, before the path to the directory inside the container. Another advantage is that when you change your file, you need not rebuild your image.
+
+`$ docker run -v <absolute-path-to folder>:/app`
+
+- Full command with the three types:
 
 `docker run -p 3000:80 -d --rm --name my_container -v file_path:/app/file-path -v <absolute-path-to-your-folder>:/app -v app/node_modules image:tag`
 
-* The -v app/node_modules can also be used in the Dockerfile to prevent a rewrite of the files in the container by the bind-mount
+- The -v app/node_modules can also be used in the Dockerfile to prevent a rewrite of the files in the container by the bind-mount
 
-- Anyways, Clone the project, build your own container from the image, run the server on port 5000
+* Anyways, Clone the project, build your own container from the image, run the server on port 5000

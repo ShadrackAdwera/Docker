@@ -21,6 +21,7 @@ app.get('/exists', (req, res) => {
   const filePath = path.join(__dirname, 'pages', 'exists.html');
   res.sendFile(filePath);
 });
+console.log('Wylin!!!')
 
 app.post('/create', async (req, res) => {
   const title = req.body.title;
