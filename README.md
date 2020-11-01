@@ -30,9 +30,9 @@ Run the following commands from your root folder.
 
 `$ docker images`
 
-- Builds and image from a Docker file:
+- Builds and image from a Docker file ad tags it:
 
-`$ docker run .`
+`$ docker build -t volume:v1 .`
 
 The result of running this command will be the container name and some other metadata.
 
@@ -104,7 +104,7 @@ The it tag tells docker that we want to run the app in an interactive mode ie. p
 
 `$ docker run -v app/data`
 
-- Named volumes persist data even when the container is removed. Removed vial the CLI
+- Named volumes persist data even when the container is removed. Removed via the CLI
 - They are ot tied to a container
 
 `$ docker run -v data:/app/data`
@@ -125,4 +125,4 @@ The it tag tells docker that we want to run the app in an interactive mode ie. p
 
 - The -v app/node_modules can also be used in the Dockerfile to prevent a rewrite of the files in the container by the bind-mount
 
-* Anyways, Clone the project, build your own container from the image, run the server on port 5000
+* Anyways, Clone the project, build your own container from the image, run the server on the port you will expose on your local environment. HAPPY CODING!
