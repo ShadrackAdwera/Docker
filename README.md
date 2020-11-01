@@ -96,17 +96,24 @@ The it tag tells docker that we want to run the app in an interactive mode ie. p
 
 ## Bind Mounts, Anonymous and Named Volumes
 
+* A volume is a file / folder inside a container that is connected to a file / folder outside of that container
+
 - Anonymous volumes are good for persisting data for the entirety of when the container is in use, it is removed when the container is removed
+    - They are tied to a specific container
+    - They can also be used to prioritize container internal paths higher than the external paths
 
 `$ docker run -v app/data`
 
-- Named volumes persist data even when the container is removed
+- Named volumes persist data even when the container is removed. Removed vial the CLI
+- They are ot tied to a container
 
 `$ docker run -v data:/app/data`
 
 - -v creates a named volume with the path /app/file-path ie. -v data:/app/data
 
-* Unlike named volumes which are only great for persisting data and not editable data, bind mounts are great for both persisting and edit data. A Bind Mount is your entire file / folder mounted inside the container as a volume.
+* Bind mounts are great for both persisting and editing data. A Bind Mount is a path on your host machine you specified that is mapped to a container internal path.
+    - Not tied to a container
+    - You cant delete it with a docker command insted, deletion is by deleting the entire file on the local environment on which it was mapped from
 
 * You add a bind mount the same way a volume is added. Use the -v tag but before the path inside the container use the absolute path to the folder / file being mounted, before the path to the directory inside the container. Another advantage is that when you change your file, you need not rebuild your image.
 
