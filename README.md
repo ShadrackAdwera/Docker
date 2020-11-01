@@ -120,6 +120,15 @@ $ docker <command name eg. run , build> --help
 $ docker run -p 3000:3000 -d --rm --name any-name image-tag
 `
 
+## Full Docker Command
+
+`
+$ docker run -p 3000:80 -d --rm --name my_container -v file_path:/app/file-path image:tag
+`
+
+`
+-v creates a named volume with the path /app/file-path 
+`
 
 
 * Anyways, Clone the project, build your own container from the image, run the server on port 5000 
