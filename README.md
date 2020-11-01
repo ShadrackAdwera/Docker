@@ -130,5 +130,6 @@ $ docker run -p 3000:80 -d --rm --name my_container -v file_path:/app/file-path 
 -v creates a named volume with the path /app/file-path 
 `
 
+* Named volumes persist data even when the container is removed
 
 * Anyways, Clone the project, build your own container from the image, run the server on port 5000 
