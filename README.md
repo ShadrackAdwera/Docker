@@ -94,7 +94,7 @@ The it tag tells docker that we want to run the app in an interactive mode ie. p
 
 `$ docker run -p 3000:3000 -d --rm --name any-name image-tag`
 
-## Full Docker Command
+### Docker Command
 
 `$ docker run -p 3000:80 -d --rm --name my_container -v file_path:/app/file-path image:tag`
 
@@ -102,12 +102,14 @@ The it tag tells docker that we want to run the app in an interactive mode ie. p
 
 - Named volumes persist data even when the container is removed
 
-### Bind Mounts
+### Bind Mounts and Named Volumes
 
 - Unlike named volumes which are only great for persisting data and not editable data, bind mounts are great for both persisting and edit data. A Bind Mount is your entire file / folder mounted inside the container as a volume.
 
-- You add a bind mount the same way a volume is added. Use the -v tag but before the path inside the container use the absolute path to the folder / file being mounted, before the path to the directory inside the container
+- You add a bind mount the same way a volume is added. Use the -v tag but before the path inside the container use the absolute path to the folder / file being mounted, before the path to the directory inside the container. Another advantage is that when you change your file, you need not rebuild your image
 
-`docker run -p 3000:80 -d --rm --name my_container -v file_path:/app/file-path -v <absolute-path-to-your-folder>:/app image:tag`
+`docker run -p 3000:80 -d --rm --name my_container -v file_path:/app/file-path -v <absolute-path-to-your-folder>:/app -v app/node_modules image:tag`
+
+* The -v app/node_modules can also be used in the Dockerfile to prevent a rewrite of the files in the container by the bind-mount
 
 - Anyways, Clone the project, build your own container from the image, run the server on port 5000
