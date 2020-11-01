@@ -21,6 +21,7 @@ app.get('/exists', (req, res) => {
   const filePath = path.join(__dirname, 'pages', 'exists.html');
   res.sendFile(filePath);
 });
+console.log('Wylin!!!')
 
 app.post('/create', async (req, res) => {
   const title = req.body.title;
@@ -36,7 +37,8 @@ app.post('/create', async (req, res) => {
     if (exists) {
       res.redirect('/exists');
     } else {
-      await fs.rename(tempFilePath, finalFilePath);
+      await fs.copyFile(tempFilePath, finalFilePath);
+      await fs.unlink(tempFilePath)
       res.redirect('/');
     }
   });
