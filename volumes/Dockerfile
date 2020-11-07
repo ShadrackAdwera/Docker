@@ -8,7 +8,9 @@ RUN npm install
 
 COPY . /app
 
-EXPOSE 80
+ENV PORT=80
+
+EXPOSE ${PORT}
 
 # VOLUME ["app/node_modules"] //can also be added as part of the command to run a container to prevent a rewrite of the files in the container by the bind mount
 
