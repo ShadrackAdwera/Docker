@@ -126,4 +126,74 @@ The it tag tells docker that we want to run the app in an interactive mode ie. p
 
 - The -v app/node_modules can also be used in the Dockerfile to prevent a rewrite of the files in the container by the bind-mount
 
+## Steps to provision a MERN application, complete with data named and anonymous volumes, bind mounts, env variables, networks
+---------------------
+Create Network
+---------------------
+
+docker network create my-network
+
+---------------------
+Run MongoDB Container
+---------------------
+
+docker run --name mongodb \
+  -e MONGO_INITDB_ROOT_USERNAME=adwera \
+  -e MONGO_INITDB_ROOT_PASSWORD=secret \
+  -v data:/data/db \
+  --rm \
+  -d \
+  --network my-network \
+  mongo
+
+---------------------
+Build Node API Image
+---------------------
+
+docker build -t my-app:v1 .
+
+---------------------
+Run Node API Container
+---------------------
+
+docker run --name my-backend \
+  -e MONGODB_USERNAME=adwera \
+  -e MONGODB_PASSWORD=secret \
+  -v logs:/app/logs \
+  -v /my-absolute-path/backend:/app \
+  -v /app/node_modules \
+  --rm \
+  -d \
+  --network my-network \
+  -p 80:80 \
+  my-node-backend
+
+---------------------
+Build React SPA Image
+---------------------
+
+docker build -t my-react:v1 .
+
+---------------------
+Run React SPA Container
+---------------------
+
+docker run --name my-frontend \
+  -v /my-absolute-path/frontend/src:/app/src \
+  --rm \
+  -d \
+  -p 3000:3000 \
+  -it \
+  my-react-frontend
+
+---------------------
+Stop all Containers
+---------------------
+
+docker stop mongodb my-node-backend my-react-frontend
+
+* For live file reload onn the backend make sure to have nodemon as a package dependency on your backend app
+
+
+
 * Anyways, Clone the project, build your own container from the image, run the server on the port you will expose on your local environment. HAPPY CODING!
