@@ -1,8 +1,8 @@
 # Docker
 
-## DISCLAIMER! This is my understanding of Docker, I'm writing this README off of my head
+## Overview
 
-So docker is just a tool for creating and managing containers. A container in simple words is a unit of software i.e packaged code with depedencies to run that code.
+Docker is a tool for creating and managing containers. A container in simple words is a unit of software i.e packaged code with depedencies to run that code.
 
 ## Why containers
 
